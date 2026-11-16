@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" aria-hidden="true">
+  <path d="M0 248C94 202 190 200 284 232C382 266 474 258 568 220C650 186 730 196 800 230V400H0Z" fill="#A6C494" opacity="0.28"/>
+  <path d="M0 296C104 258 214 264 320 292C426 320 528 314 630 280C698 258 754 264 800 286V400H0Z" fill="#7EA768" opacity="0.3"/>
+  <path d="M0 344C108 316 220 322 332 346C448 370 560 364 668 334C716 320 764 324 800 342V400H0Z" fill="#5D8848" opacity="0.35"/>
+  <g fill="none" stroke="#D9A441" stroke-width="4" stroke-linecap="round" opacity="0.4">
+    <path d="M90 400V330"/>
+    <path d="M90 360C72 352 66 336 68 320"/>
+    <path d="M90 376C108 368 114 352 112 336"/>
+    <path d="M716 400V338"/>
+    <path d="M716 366C698 358 692 342 694 326"/>
+    <path d="M716 382C734 374 740 358 738 342"/>
+  </g>
+  <g fill="none" stroke="#D9A441" stroke-width="3" stroke-linecap="round" opacity="0.28">
+    <path d="M180 400C248 358 330 340 420 340"/>
+    <path d="M620 400C552 358 470 340 380 340"/>
+  </g>
+</svg>

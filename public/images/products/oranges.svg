@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="title">
+  <title id="title">Taronges de València</title>
+  <rect width="400" height="300" fill="#F9EEDC"/>
+  <circle cx="330" cy="62" r="100" fill="#F4E3C9" opacity="0.9"/>
+  <circle cx="64" cy="248" r="78" fill="#F6E7D0" opacity="0.7"/>
+  <ellipse cx="200" cy="264" rx="142" ry="17" fill="#D9C09A" opacity="0.5"/>
+
+  <g>
+    <circle cx="146" cy="158" r="54" fill="#E8872E"/>
+    <circle cx="236" cy="146" r="60" fill="#E07B24"/>
+    <circle cx="286" cy="192" r="38" fill="#EE9336"/>
+    <circle cx="116" cy="202" r="34" fill="#EE9336"/>
+
+    <ellipse cx="126" cy="136" rx="14" ry="8" fill="#F7B96A" opacity="0.55" transform="rotate(-30 126 136)"/>
+    <ellipse cx="214" cy="120" rx="15" ry="9" fill="#F7B96A" opacity="0.55" transform="rotate(-30 214 120)"/>
+    <ellipse cx="272" cy="176" rx="10" ry="6" fill="#F7B96A" opacity="0.55" transform="rotate(-30 272 176)"/>
+
+    <g fill="#C96B1B" opacity="0.25">
+      <circle cx="132" cy="178" r="2.5"/>
+      <circle cx="160" cy="190" r="2"/>
+      <circle cx="222" cy="166" r="2.5"/>
+      <circle cx="252" cy="178" r="2"/>
+      <circle cx="102" cy="216" r="2"/>
+      <circle cx="294" cy="206" r="2"/>
+    </g>
+
+    <path d="M206 90C220 72 244 68 262 76C250 94 228 100 206 90Z" fill="#5D8848"/>
+    <path d="M206 92C220 82 238 80 254 84" fill="none" stroke="#3E5D2A" stroke-width="3" stroke-linecap="round"/>
+    <path d="M206 90C204 106 196 120 184 130" fill="none" stroke="#3E5D2A" stroke-width="4" stroke-linecap="round"/>
+
+    <g transform="translate(112 204)">
+      <circle r="7" fill="#FBF7EF" opacity="0.75"/>
+      <circle r="3" fill="#E8B24E"/>
+    </g>
+  </g>
+
+  <g>
+    <rect x="64" y="222" width="272" height="52" rx="9" fill="#C08A5A"/>
+    <rect x="72" y="214" width="256" height="16" rx="6" fill="#D3A170"/>
+    <path d="M64 240H336M64 258H336M132 214V274M200 214V274M268 214V274" stroke="#9C6B40" stroke-width="4"/>
+  </g>
+
+  <g fill="#3E5D2A" opacity="0.25">
+    <circle cx="348" cy="128" r="3"/>
+    <circle cx="48" cy="122" r="2.5"/>
+  </g>
+</svg>

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-leaf-200 text-forest-950;
+  }
+
+  :focus-visible {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[11px] font-bold uppercase tracking-[0.24em] text-leaf-700;
+  }
+
+  .eyebrow-light {
+    @apply text-[11px] font-bold uppercase tracking-[0.24em] text-wheat;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest-800 px-6 py-3.5 text-sm font-semibold text-cream shadow-[0_12px_24px_-14px_rgba(31,58,38,0.8)] transition duration-200 hover:bg-forest-700 hover:shadow-[0_16px_30px_-14px_rgba(31,58,38,0.75)] focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:scale-[0.99];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest-900/20 bg-white/40 px-6 py-3.5 text-sm font-semibold text-forest-950 transition duration-200 hover:border-forest-900/35 hover:bg-white/80 focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:scale-[0.99];
+  }
+
+  .btn-clay {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-clay px-6 py-3.5 text-sm font-semibold text-cream shadow-[0_12px_24px_-14px_rgba(184,92,56,0.85)] transition duration-200 hover:bg-[#a34f2f] focus-visible:ring-2 focus-visible:ring-clay focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:scale-[0.99];
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-forest-900/15 bg-white/70 px-4 py-3.5 text-sm text-ink shadow-sm outline-none transition placeholder:text-ink/35 focus:border-forest-500 focus:bg-white focus:ring-4 focus:ring-forest-500/10;
+  }
+
+  .label {
+    @apply mb-2 block text-[11px] font-bold uppercase tracking-[0.16em] text-forest-900/65;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-forest-900/10 bg-white/50 px-4 py-2.5 text-sm font-medium text-forest-900/75 transition hover:border-forest-900/25 hover:bg-white;
+  }
+
+  .chip-active {
+    @apply border-forest-800 bg-forest-800 text-cream shadow-sm hover:border-forest-800 hover:bg-forest-800;
+  }
+
+  .auth-link {
+    @apply font-semibold text-forest-900 underline-offset-4 transition hover:text-clay hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

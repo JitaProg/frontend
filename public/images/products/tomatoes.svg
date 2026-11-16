@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="title">
+  <title id="title">Tomàquets de penjar</title>
+  <rect width="400" height="300" fill="#F3E7DA"/>
+  <circle cx="330" cy="62" r="108" fill="#EBDCC7" opacity="0.85"/>
+  <circle cx="64" cy="258" r="82" fill="#EFE2CE" opacity="0.7"/>
+  <ellipse cx="200" cy="252" rx="126" ry="17" fill="#D9C6A8" opacity="0.5"/>
+
+  <g fill="none" stroke="#4F7734" stroke-width="9" stroke-linecap="round">
+    <path d="M206 112C202 84 188 68 168 58"/>
+    <path d="M206 112C222 84 246 70 268 64"/>
+    <path d="M206 112C208 92 216 80 228 72"/>
+  </g>
+
+  <g transform="translate(162 196)">
+    <circle r="64" fill="#C94B3C"/>
+    <ellipse cx="-22" cy="-24" rx="17" ry="10" fill="#FBF7EF" opacity="0.25" transform="rotate(-32 -22 -24)"/>
+    <path d="M0 -56L-18 -74L-9 -54L-30 -50L-10 -42L0 -23L10 -42L30 -50L9 -54L18 -74Z" fill="#4F7734"/>
+    <path d="M0 -56V-82" stroke="#3E5D2A" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(270 204)">
+    <circle r="48" fill="#D65545"/>
+    <ellipse cx="-17" cy="-17" rx="13" ry="8" fill="#FBF7EF" opacity="0.25" transform="rotate(-32 -17 -17)"/>
+    <path d="M0 -42L-14 -56L-7 -41L-23 -38L-8 -32L0 -17L8 -32L23 -38L7 -41L14 -56Z" fill="#4F7734"/>
+    <path d="M0 -42V-62" stroke="#3E5D2A" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(218 118)">
+    <circle r="38" fill="#D25A49"/>
+    <ellipse cx="-13" cy="-13" rx="10" ry="6" fill="#FBF7EF" opacity="0.3" transform="rotate(-32 -13 -13)"/>
+    <path d="M0 -33L-11 -44L-6 -33L-18 -30L-6 -25L0 -13L6 -25L18 -30L6 -33L11 -44Z" fill="#5D8848"/>
+    <path d="M0 -33V-49" stroke="#3E5D2A" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <g fill="#5D8848">
+    <ellipse cx="94" cy="108" rx="19" ry="9" transform="rotate(-32 94 108)"/>
+    <ellipse cx="306" cy="114" rx="19" ry="9" transform="rotate(32 306 114)"/>
+  </g>
+  <g fill="#3E5D2A">
+    <circle cx="340" cy="242" r="3" opacity="0.4"/>
+    <circle cx="58" cy="80" r="4" opacity="0.3"/>
+    <circle cx="288" cy="56" r="2.5" opacity="0.4"/>
+  </g>
+</svg>

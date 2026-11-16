@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="title">
+  <title id="title">Formatge de cabra</title>
+  <rect width="400" height="300" fill="#F5EFDE"/>
+  <circle cx="326" cy="66" r="100" fill="#EDE4CE" opacity="0.85"/>
+  <circle cx="62" cy="244" r="76" fill="#EFE7D4" opacity="0.7"/>
+  <ellipse cx="200" cy="264" rx="144" ry="16" fill="#D8C7A9" opacity="0.5"/>
+
+  <ellipse cx="200" cy="226" rx="148" ry="34" fill="#B98550"/>
+  <ellipse cx="200" cy="218" rx="148" ry="31" fill="#C9935E"/>
+  <path d="M52 218C52 236 118 252 200 252C282 252 348 236 348 218" fill="#A97646" opacity="0.45"/>
+
+  <g transform="translate(4 -6)">
+    <path d="M112 128L282 104L314 204L142 230Z" fill="#F0C75B"/>
+    <path d="M282 104L314 204L286 208L254 112Z" fill="#DDA93A"/>
+    <path d="M112 128L142 230L130 232C122 216 110 170 112 128Z" fill="#E2B347"/>
+    <path d="M112 128L282 104L286 112L118 136Z" fill="#F7DA8A"/>
+    <circle cx="190" cy="166" r="11" fill="#D8A63A"/>
+    <circle cx="230" cy="152" r="8" fill="#D8A63A"/>
+    <circle cx="248" cy="186" r="12" fill="#D8A63A"/>
+    <circle cx="164" cy="196" r="7" fill="#D8A63A"/>
+    <circle cx="214" cy="206" r="6" fill="#D8A63A"/>
+    <ellipse cx="170" cy="154" rx="12" ry="5" fill="#F9E4A6" opacity="0.65" transform="rotate(-12 170 154)"/>
+  </g>
+
+  <g transform="translate(312 172)">
+    <path d="M0 30C12 14 26 6 44 4" fill="none" stroke="#3E5D2A" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#5D8848">
+      <ellipse cx="6" cy="24" rx="9" ry="3.5" transform="rotate(-38 6 24)"/>
+      <ellipse cx="16" cy="15" rx="9" ry="3.5" transform="rotate(-30 16 15)"/>
+      <ellipse cx="28" cy="9" rx="9" ry="3.5" transform="rotate(-22 28 9)"/>
+      <ellipse cx="40" cy="5" rx="8" ry="3" transform="rotate(-14 40 5)"/>
+    </g>
+  </g>
+
+  <g fill="#5D8848" opacity="0.65">
+    <ellipse cx="92" cy="108" rx="12" ry="5" transform="rotate(-32 92 108)"/>
+    <ellipse cx="76" cy="116" rx="11" ry="5" transform="rotate(28 76 116)"/>
+  </g>
+  <g fill="#3E5D2A" opacity="0.25">
+    <circle cx="342" cy="126" r="3"/>
+    <circle cx="64" cy="164" r="2.5"/>
+  </g>
+</svg>

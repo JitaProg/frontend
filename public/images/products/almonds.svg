@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="title">
+  <title id="title">Ametlles Marcona</title>
+  <rect width="400" height="300" fill="#F3E9DB"/>
+  <circle cx="328" cy="64" r="98" fill="#EADDC8" opacity="0.85"/>
+  <circle cx="62" cy="246" r="76" fill="#EDE2D0" opacity="0.7"/>
+  <ellipse cx="200" cy="272" rx="134" ry="16" fill="#D6C1A1" opacity="0.5"/>
+
+  <g transform="translate(0 6)">
+    <path d="M130 104H270L286 236C288 258 270 274 248 274H152C130 274 112 258 114 236Z" fill="#C8A87A"/>
+    <path d="M130 104H270L276 142C244 154 156 154 124 142Z" fill="#D5B98E"/>
+    <path d="M130 104C130 88 142 78 158 78H242C258 78 270 88 270 104" fill="#B89462"/>
+    <path d="M142 100H258" stroke="#8B6A42" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+    <path d="M118 176C154 186 246 186 282 176" fill="none" stroke="#B08D5F" stroke-width="3" opacity="0.7"/>
+    <rect x="148" y="156" width="104" height="70" rx="8" fill="#FBF7EF"/>
+    <text x="200" y="182" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="700" fill="#7C5636" letter-spacing="1.5">AMETLLES</text>
+    <text x="200" y="198" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#5D8848" letter-spacing="1.4">MARCONA</text>
+    <path d="M177 210C184 202 194 200 202 202" fill="none" stroke="#5D8848" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="186" cy="214" rx="6" ry="3.5" fill="#5D8848" transform="rotate(-24 186 214)"/>
+    <ellipse cx="198" cy="208" rx="6" ry="3.5" fill="#4F7734" transform="rotate(24 198 208)"/>
+  </g>
+
+  <g fill="#A9744A">
+    <ellipse cx="92" cy="230" rx="16" ry="9" transform="rotate(-28 92 230)"/>
+    <ellipse cx="74" cy="246" rx="14" ry="8" transform="rotate(16 74 246)"/>
+    <ellipse cx="316" cy="236" rx="16" ry="9" transform="rotate(24 316 236)"/>
+    <ellipse cx="334" cy="220" rx="13" ry="7" transform="rotate(-18 334 220)"/>
+    <ellipse cx="110" cy="262" rx="14" ry="8" transform="rotate(32 110 262)"/>
+    <ellipse cx="296" cy="260" rx="15" ry="8" transform="rotate(-24 296 260)"/>
+  </g>
+  <g fill="#C89A6A" opacity="0.5">
+    <ellipse cx="88" cy="226" rx="6" ry="3" transform="rotate(-28 88 226)"/>
+    <ellipse cx="312" cy="232" rx="6" ry="3" transform="rotate(24 312 232)"/>
+  </g>
+
+  <g fill="#3E5D2A" opacity="0.22">
+    <circle cx="356" cy="132" r="3"/>
+    <circle cx="56" cy="120" r="2.5"/>
+  </g>
+</svg>

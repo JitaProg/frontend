@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 620" role="img" aria-labelledby="title">
+  <title id="title">Pagesa amb una caixa de verdures</title>
+  <defs>
+    <linearGradient id="farmerSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6EDDB"/>
+      <stop offset="1" stop-color="#EDE0C8"/>
+    </linearGradient>
+    <linearGradient id="farmerHill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A6C494"/>
+      <stop offset="1" stop-color="#7EA768"/>
+    </linearGradient>
+    <linearGradient id="farmerField" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6E9352"/>
+      <stop offset="1" stop-color="#4E703C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="620" fill="url(#farmerSky)"/>
+  <circle cx="478" cy="112" r="82" fill="#F3D28B" opacity="0.55"/>
+  <circle cx="478" cy="112" r="54" fill="#EFBE62"/>
+
+  <g fill="#FBF7EF" opacity="0.8">
+    <ellipse cx="120" cy="106" rx="58" ry="18"/>
+    <ellipse cx="158" cy="96" rx="36" ry="14"/>
+  </g>
+
+  <path d="M0 356C70 312 152 306 232 336C310 366 376 360 452 322C520 288 566 298 600 318V620H0Z" fill="#C8DAB4"/>
+  <path d="M0 430C84 390 174 392 260 420C346 448 430 442 516 404C556 386 582 388 600 396V620H0Z" fill="url(#farmerHill)"/>
+  <path d="M0 510C100 478 208 486 310 508C404 528 502 524 600 492V620H0Z" fill="url(#farmerField)"/>
+
+  <g fill="none" stroke="#8BAE6B" stroke-width="7" stroke-linecap="round" opacity="0.5">
+    <path d="M40 620C98 552 176 522 270 520"/>
+    <path d="M560 620C498 548 424 520 336 520"/>
+  </g>
+
+  <g transform="translate(300 340)">
+    <rect x="-74" y="76" width="148" height="164" rx="52" fill="#2E4526"/>
+    <path d="M-74 150H74V196C74 220 56 240 30 240H-30C-56 240 -74 220 -74 196Z" fill="#27401F"/>
+    <path d="M-52 84L-30 30H30L52 84" fill="#3E5D2A"/>
+    <rect x="-34" y="190" width="68" height="52" rx="10" fill="#3E5D2A" opacity="0.7"/>
+
+    <path d="M-58 110C-102 126 -120 158 -116 196" fill="none" stroke="#C08A5A" stroke-width="24" stroke-linecap="round"/>
+    <path d="M58 110C102 126 120 158 116 196" fill="none" stroke="#C08A5A" stroke-width="24" stroke-linecap="round"/>
+
+    <circle cx="0" cy="0" r="58" fill="#E4B48B"/>
+    <path d="M-58 -12C-58 -58 -30 -82 0 -82C30 -82 58 -58 58 -12C50 -2 36 6 0 6C-36 6 -50 -2 -58 -12Z" fill="#5B4432"/>
+    <ellipse cx="0" cy="-54" rx="95" ry="30" fill="#C9A24B"/>
+    <path d="M-38 -70C-30 -104 30 -104 38 -70C22 -58 -22 -58 -38 -70Z" fill="#D8B35E"/>
+    <path d="M-42 -80C-22 -92 22 -92 42 -80" fill="none" stroke="#B48B3A" stroke-width="7" stroke-linecap="round"/>
+
+    <g fill="#3B2C22">
+      <ellipse cx="-20" cy="-8" rx="5" ry="6"/>
+      <ellipse cx="20" cy="-8" rx="5" ry="6"/>
+    </g>
+    <path d="M-12 18C-5 25 5 25 12 18" fill="none" stroke="#A9684E" stroke-width="4" stroke-linecap="round"/>
+    <g fill="#D89A72" opacity="0.7">
+      <circle cx="-34" cy="10" r="8"/>
+      <circle cx="34" cy="10" r="8"/>
+    </g>
+
+    <path d="M-54 128C-20 116 20 116 54 128L44 152C18 162 -18 162 -44 152Z" fill="#C08A5A"/>
+    <rect x="-64" y="140" width="128" height="78" rx="10" fill="#B98550"/>
+    <path d="M-64 158H64M-64 182H64M-24 140V218M24 140V218" stroke="#96683E" stroke-width="6"/>
+    <path d="M-36 140C-32 122 -20 116 -8 116C4 116 16 122 20 140" fill="#C94B3C"/>
+    <path d="M0 140C4 124 14 118 26 118C38 118 48 124 52 140" fill="#E8872E"/>
+    <ellipse cx="-8" cy="136" rx="18" ry="8" fill="#4F7734"/>
+    <ellipse cx="26" cy="136" rx="16" ry="7" fill="#4F7734"/>
+    <path d="M-50 152C-42 142 -30 146 -28 156" fill="#6E9352"/>
+  </g>
+
+  <g fill="none" stroke="#3E5D2A" stroke-width="6" stroke-linecap="round">
+    <path d="M74 606V530"/>
+    <path d="M74 566C54 556 46 538 48 518"/>
+    <path d="M74 586C94 576 102 558 100 538"/>
+    <path d="M530 612V542"/>
+    <path d="M530 574C510 564 502 546 504 526"/>
+    <path d="M530 594C550 584 558 566 556 546"/>
+  </g>
+  <g fill="#2E4526">
+    <ellipse cx="42" cy="524" rx="18" ry="9" transform="rotate(-30 42 524)"/>
+    <ellipse cx="102" cy="542" rx="18" ry="9" transform="rotate(30 102 542)"/>
+    <ellipse cx="498" cy="532" rx="18" ry="9" transform="rotate(-30 498 532)"/>
+    <ellipse cx="558" cy="550" rx="18" ry="9" transform="rotate(30 558 550)"/>
+  </g>
+</svg>
