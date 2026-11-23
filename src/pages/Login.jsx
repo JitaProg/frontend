@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -6,26 +6,44 @@ import {
   CheckCircle2,
   Eye,
   EyeOff,
-  Info,
   Lock,
   Mail,
 } from 'lucide-react'
 import AuthSide from '../components/AuthSide'
 import Logo from '../components/Logo'
+import { useAuth } from '../auth/AuthContext'
 
 export default function Login() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { login, logout, retrySession, status, message, recovery } = useAuth()
   const [form, setForm] = useState({ email: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const pending = useRef(false)
 
   const handleChange = (event) => {
+    setError('')
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    navigate('/')
+    if (pending.current || status === 'checking' || status === 'blocked') return
+    pending.current = true
+    setSubmitting(true)
+    setError('')
+    setShowPassword(false)
+    setForm((current) => ({ ...current, password: '' }))
+    try {
+      const result = await login({ email: form.email.trim(), password: form.password })
+      if (result.ok) navigate('/', { replace: true })
+      else setError(result.message || 'No s’ha pogut iniciar sessió.')
+    } finally {
+      pending.current = false
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -82,7 +100,21 @@ export default function Login() {
             de producte fresc.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-9 space-y-5">
+          {(message || error) && (
+            <div className="mt-6 space-y-2 rounded-2xl bg-white/60 p-4 text-sm text-forest-950">
+              {message && <p role="alert">{message}</p>}
+              {error && error !== message && <p role="alert">{error}</p>}
+              {recovery && (
+                <button type="button" className="auth-link" onClick={recovery === 'logout' ? logout : retrySession}>
+                  {recovery === 'logout' ? 'Tanca la sessió al servidor' : 'Torna a recuperar la sessió'}
+                </button>
+              )}
+              {recovery === 'refresh' && (
+                <button type="button" className="auth-link ml-3" onClick={logout}>Tanca la sessió</button>
+              )}
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="mt-9 space-y-5" aria-busy={submitting}>
             <div>
               <label htmlFor="email" className="label">
                 Correu electrònic
@@ -94,6 +126,7 @@ export default function Login() {
                   name="email"
                   type="email"
                   required
+                  disabled={submitting}
                   autoComplete="email"
                   value={form.email}
                   onChange={handleChange}
@@ -102,7 +135,6 @@ export default function Login() {
                 />
               </div>
             </div>
-
             <div>
               <div className="flex items-center justify-between gap-3">
                 <label htmlFor="password" className="label !mb-0">
@@ -122,6 +154,7 @@ export default function Login() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
+                  disabled={submitting}
                   autoComplete="current-password"
                   value={form.password}
                   onChange={handleChange}
@@ -145,16 +178,12 @@ export default function Login() {
               </div>
             </div>
 
-            <label className="flex items-center gap-2.5 text-sm text-ink/60">
-              <input
-                type="checkbox"
-                className="h-4 w-4 rounded border-forest-900/25 accent-forest-800"
-              />
-              Recorda'm en aquest dispositiu
-            </label>
-
-            <button type="submit" className="btn-primary w-full">
-              Entrar
+            <button
+              type="submit"
+              disabled={submitting || status === 'checking' || status === 'blocked'}
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {submitting ? 'Iniciant sessió…' : 'Entrar'}
               <ArrowRight className="h-4 w-4" />
             </button>
           </form>
@@ -166,14 +195,6 @@ export default function Login() {
             </Link>
           </p>
 
-          <div className="mt-8 flex items-start gap-3 rounded-2xl border border-forest-900/10 bg-white/50 p-4 text-xs leading-relaxed text-ink/50">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" />
-            <p>
-              <span className="font-semibold text-forest-900">Demo visual.</span> Aquest
-              formulari encara no està connectat a l'API. En entrar accediràs directament a
-              la pàgina d'inici.
-            </p>
-          </div>
         </div>
 
         <p className="text-center text-[11px] text-ink/35">

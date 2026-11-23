@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import {
   ArrowRight,
   Check,
@@ -15,8 +15,6 @@ import {
   Truck,
   Users,
 } from 'lucide-react'
-import ProductCard from '../components/ProductCard'
-import { categories, products } from '../data/products'
 
 const stats = [
   { value: '120', label: 'Famílies sòcies' },
@@ -44,15 +42,19 @@ const coopFeatures = [
 ]
 
 export default function Home() {
-  const { addToCart } = useOutletContext()
-  const [activeCategory, setActiveCategory] = useState('tots')
+  const { hash, key } = useLocation()
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
-  const filteredProducts =
-    activeCategory === 'tots'
-      ? products
-      : products.filter((product) => product.category === activeCategory)
+  useEffect(() => {
+    if (!hash) return
+    const frame = window.requestAnimationFrame(() => {
+      const section = document.getElementById(hash.slice(1))
+      section?.focus({ preventScroll: true })
+      section?.scrollIntoView()
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [hash, key])
 
   const handleSubscribe = (event) => {
     event.preventDefault()
@@ -66,7 +68,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section id="inici" className="relative scroll-mt-24 overflow-hidden">
+      <section id="inici" tabIndex={-1} className="relative scroll-mt-24 overflow-hidden">
         <div className="pointer-events-none absolute -left-40 top-10 h-96 w-96 rounded-full bg-leaf-200/40 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 top-48 h-80 w-80 rounded-full bg-wheat/10 blur-3xl" />
 
@@ -91,10 +93,10 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#productes" className="btn-primary">
+              <Link to="/catalog" className="btn-primary">
                 Explora la botiga
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
               <a href="#cooperativa" className="btn-secondary">
                 Coneix la cooperativa
               </a>
@@ -193,90 +195,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Categories */}
-      <section className="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="eyebrow">Compra per categoria</span>
-            <h2 className="mt-3 font-display text-3xl tracking-tight text-forest-950 sm:text-4xl">
-              Què et ve de gust avui?
-            </h2>
-          </div>
-          <p className="max-w-sm text-sm leading-relaxed text-ink/55">
-            Filtra la botiga i troba el producte que busques. Tot és de temporada i ve
-            directament de les nostres explotacions.
-          </p>
-        </div>
-
-        <div className="mt-8 flex flex-wrap gap-2.5">
-          {categories.map((category) => {
-            const Icon = category.icon
-            const count =
-              category.id === 'tots'
-                ? products.length
-                : products.filter((product) => product.category === category.id).length
-
-            return (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => setActiveCategory(category.id)}
-                aria-pressed={activeCategory === category.id}
-                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition ${
-                  activeCategory === category.id
-                    ? 'border-forest-800 bg-forest-800 text-cream shadow-sm'
-                    : 'border-forest-900/10 bg-white/50 text-forest-900/75 hover:border-forest-900/25 hover:bg-white'
-                }`}
-              >
-                <Icon className="h-4 w-4" strokeWidth={1.8} />
-                {category.label}
-                <span
-                  className={`grid h-5 min-w-5 place-items-center rounded-full px-1 text-[10px] font-bold ${
-                    activeCategory === category.id
-                      ? 'bg-cream/15 text-cream'
-                      : 'bg-forest-900/5 text-forest-900/45'
-                  }`}
-                >
-                  {count}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Products */}
-      <section id="productes" className="mx-auto mt-12 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      {/* Keep the old fragment as a landing point for saved links. */}
+      <section id="productes" tabIndex={-1} className="mx-auto mt-20 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-5 rounded-3xl border border-forest-900/10 bg-white/50 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div>
             <span className="eyebrow">La botiga</span>
             <h2 className="mt-3 font-display text-3xl tracking-tight text-forest-950 sm:text-4xl">
-              Els favorits de la temporada
+              Productes de la cooperativa
             </h2>
             <p className="mt-2 text-sm text-ink/55">
-              Producte fresc, collit aquesta setmana i amb el millor preu possible.
+              Descobreix els productes de temporada, cerca pel nom o explora per categoria.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('tots')}
-            className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-forest-900 transition hover:text-clay"
-          >
-            Veure'ls tots
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
-
-        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} onAdd={addToCart} />
-          ))}
+          <Link to="/catalog" className="btn-primary w-fit shrink-0">
+            Ves al catàleg
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-forest-900/10 bg-white/40 px-5 py-4 text-sm text-ink/55">
           <span className="inline-flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-wheat" />
-            La selecció canvia cada setmana segons la collita.
+            Descobreix la selecció de la cooperativa.
           </span>
           <span className="inline-flex items-center gap-2 font-medium text-forest-900">
             <Clock3 className="h-4 w-4" />
@@ -286,7 +226,7 @@ export default function Home() {
       </section>
 
       {/* Cooperative */}
-      <section id="cooperativa" className="mx-auto mt-20 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
+      <section id="cooperativa" tabIndex={-1} className="mx-auto mt-20 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-forest-900 px-6 py-12 text-cream sm:px-10 lg:px-14 lg:py-16">
           <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border border-cream/10" />
           <div className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-leaf-500/10 blur-2xl" />
@@ -363,7 +303,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter / contact */}
-      <section id="contacte" className="mx-auto mt-20 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
+      <section id="contacte" tabIndex={-1} className="mx-auto mt-20 max-w-7xl scroll-mt-24 px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] border border-forest-900/10 bg-sand px-6 py-12 sm:px-10 lg:px-14 lg:py-14">
           <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-leaf-200/50 blur-2xl" />
           <div className="pointer-events-none absolute -bottom-24 right-1/3 h-56 w-56 rounded-full bg-wheat/10 blur-2xl" />

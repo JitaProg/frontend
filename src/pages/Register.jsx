@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -29,14 +29,26 @@ export default function Register() {
   const [accept, setAccept] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const activeSubmission = useRef(null)
+
+  useLayoutEffect(() => {
+    return () => {
+      const submission = activeSubmission.current
+      activeSubmission.current = null
+      // Cancel·la l'espera del client, no desfà un registre que el servidor ja hagi rebut.
+      submission?.abort()
+    }
+  }, [])
 
   const handleChange = (event) => {
     setError('')
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    if (activeSubmission.current) return
 
     if (form.password.length < 8) {
       setError('La contrasenya ha de tenir com a mínim 8 caràcters.')
@@ -48,7 +60,57 @@ export default function Register() {
       return
     }
 
-    navigate('/login', { state: { registered: true } })
+    const { nom, cognoms, email, password } = form
+    const telefon = form.telefon.replace(/\s/g, '')
+    if (telefon && !/^[0-9]{9}$/.test(telefon)) {
+      setError('El telèfon ha de tenir 9 dígits. Si no el vols indicar, deixa el camp buit.')
+      return
+    }
+    const payload = { nom, cognoms, email, password, ...(telefon && { telefon }) }
+
+    const submission = new AbortController()
+    activeSubmission.current = submission
+    const { signal } = submission
+    setIsSubmitting(true)
+    setError('')
+
+    let registered = false
+    try {
+      const response = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        redirect: 'manual',
+        signal,
+      })
+      if (signal.aborted) return
+
+      if (response.status === 409) {
+        setError('Ja hi ha un compte amb aquest correu electrònic. Pots iniciar sessió.')
+      } else if (response.status === 422) {
+        setError('Revisa el nom, els cognoms, el correu i la contrasenya. Si indiques un telèfon, ha de tenir 9 dígits.')
+      } else if (response.status === 201) {
+        const result = await response.json().catch(() => null)
+        if (signal.aborted) return
+        const id = result?.data?._id
+        registered = result?.success === true && typeof id === 'string' && /^[a-f0-9]{24}$/i.test(id)
+      }
+
+      if (!registered && response.status !== 409 && response.status !== 422) {
+        setError('No hem pogut confirmar el registre. Si el compte no s’ha creat, torna-ho a provar.')
+      }
+    } catch {
+      if (!signal.aborted) {
+        setError('No s’ha pogut connectar amb el servidor. Comprova la connexió i torna-ho a provar.')
+      }
+    } finally {
+      if (!signal.aborted && !registered) {
+        activeSubmission.current = null
+        setIsSubmitting(false)
+      }
+    }
+
+    if (registered) navigate('/login', { state: { registered: true } })
   }
 
   return (
@@ -83,7 +145,7 @@ export default function Register() {
             producte fresc i preu just.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <form onSubmit={handleSubmit} aria-busy={isSubmitting} className="mt-8 space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor="nom" className="label">
@@ -254,8 +316,8 @@ export default function Register() {
               </span>
             </label>
 
-            <button type="submit" className="btn-primary w-full">
-              Crear el meu compte
+            <button type="submit" disabled={isSubmitting} className="btn-primary w-full">
+              {isSubmitting ? 'Creant el compte…' : 'Crear el meu compte'}
               <ArrowRight className="h-4 w-4" />
             </button>
           </form>
@@ -268,8 +330,7 @@ export default function Register() {
           </p>
 
           <p className="mt-6 text-center text-[11px] leading-relaxed text-ink/35">
-            Demo visual de la Sessió 9. El formulari no envia dades a cap servidor: en
-            completar-lo accediràs a la pàgina d'inici de sessió.
+            Quan es confirmi el registre, et portarem a la pàgina d'inici de sessió.
           </p>
         </div>
 

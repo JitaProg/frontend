@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Check, Heart, ShoppingBasket, Star } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Check, Heart, ImageOff, ShoppingBasket, Star } from 'lucide-react'
 import { formatPrice } from '../data/products'
 
 const tagStyles = {
@@ -9,32 +9,65 @@ const tagStyles = {
   Nou: 'bg-wheat text-forest-950',
 }
 
+function ProductImage({ src, name }) {
+  const [failed, setFailed] = useState(false)
+
+  if (!src || failed) {
+    return (
+      <div
+        role="img"
+        aria-label={`Imatge no disponible: ${name}`}
+        className="grid h-52 w-full place-items-center bg-sand text-forest-900/45"
+      >
+        <ImageOff aria-hidden="true" className="h-10 w-10" strokeWidth={1.4} />
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className="h-52 w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+    />
+  )
+}
+
 export default function ProductCard({ product, onAdd }) {
   const [liked, setLiked] = useState(false)
   const [added, setAdded] = useState(false)
+  const addTimeout = useRef()
+  const hasPrice = Number.isFinite(product.price) && product.price > 0
+  const outOfStock = product.stock === 0
+  const hasRating = Number.isFinite(product.rating) && product.rating >= 0 && product.rating <= 5
+  const hasReviews = Number.isSafeInteger(product.reviews) && product.reviews >= 0
+  const canAdd = hasPrice && !outOfStock && typeof onAdd === 'function'
+
+  useEffect(() => () => window.clearTimeout(addTimeout.current), [])
 
   const handleAdd = () => {
+    if (!canAdd) return
     onAdd()
     setAdded(true)
-    window.setTimeout(() => setAdded(false), 1400)
+    window.clearTimeout(addTimeout.current)
+    addTimeout.current = window.setTimeout(() => setAdded(false), 1400)
   }
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-forest-900/10 bg-white/65 shadow-[0_14px_32px_-26px_rgba(31,58,38,0.5)] transition duration-300 hover:-translate-y-1 hover:border-forest-900/20 hover:shadow-card">
       <div className="relative overflow-hidden bg-sand">
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          className="h-52 w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-        />
-        <span
-          className={`absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
-            tagStyles[product.tag] ?? 'bg-forest-800 text-cream'
-          }`}
-        >
-          {product.tag}
-        </span>
+        <ProductImage key={product.image} src={product.image} name={product.name} />
+        {product.tag && (
+          <span
+            className={`absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
+              tagStyles[product.tag] ?? 'bg-forest-800 text-cream'
+            }`}
+          >
+            {product.tag}
+          </span>
+        )}
         <button
           type="button"
           onClick={() => setLiked((value) => !value)}
@@ -55,36 +88,50 @@ export default function ProductCard({ product, onAdd }) {
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-leaf-700">
-            {product.categoryLabel}
-          </span>
-          <span className="inline-flex items-center gap-1 text-xs font-medium text-ink/60">
-            <Star className="h-3.5 w-3.5 fill-wheat text-wheat" />
-            {product.rating.toFixed(1).replace('.', ',')}
-            <span className="text-ink/35">({product.reviews})</span>
-          </span>
-        </div>
+        {(product.categoryLabel || hasRating) && (
+          <div className="flex items-center justify-between gap-2">
+            {product.categoryLabel && (
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-leaf-700">
+                {product.categoryLabel}
+              </span>
+            )}
+            {hasRating && (
+              <span className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-ink/60">
+                <Star aria-hidden="true" className="h-3.5 w-3.5 fill-wheat text-wheat" />
+                {product.rating.toFixed(1).replace('.', ',')}
+                {hasReviews && <span className="text-ink/35">({product.reviews})</span>}
+              </span>
+            )}
+          </div>
+        )}
 
         <h3 className="mt-2 font-display text-xl leading-snug text-forest-950">
           {product.name}
         </h3>
-        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink/55">
-          {product.description}
-        </p>
+        {product.description && (
+          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink/55">
+            {product.description}
+          </p>
+        )}
 
         <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-          <p className="font-display text-2xl text-forest-950">
-            {formatPrice(product.price)}
-            <span className="ml-1 font-sans text-[11px] font-medium text-ink/45">
-              / {product.unit}
-            </span>
-          </p>
+          <div>
+            <p className="font-display text-2xl text-forest-950">
+              {hasPrice ? formatPrice(product.price) : 'Preu no disponible'}
+              {hasPrice && product.unit && (
+                <span className="ml-1 font-sans text-[11px] font-medium text-ink/45">
+                  / {product.unit}
+                </span>
+              )}
+            </p>
+            {outOfStock && <p className="text-xs text-ink/65">Sense estoc</p>}
+          </div>
           <button
             type="button"
             onClick={handleAdd}
+            disabled={!canAdd}
             aria-label={`Afegir ${product.name} a la cistella`}
-            className={`grid h-11 w-11 shrink-0 place-items-center rounded-full transition duration-200 ${
+            className={`grid h-11 w-11 shrink-0 place-items-center rounded-full transition duration-200 disabled:cursor-not-allowed disabled:opacity-45 ${
               added
                 ? 'bg-leaf-600 text-white'
                 : 'bg-forest-800 text-cream hover:bg-forest-700'

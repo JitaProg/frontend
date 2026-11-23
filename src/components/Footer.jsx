@@ -6,19 +6,17 @@ const columns = [
   {
     title: 'Botiga',
     links: [
-      { label: 'Tots els productes', href: '#productes' },
-      { label: 'Horta de temporada', href: '#productes' },
-      { label: 'Olis i conserves', href: '#productes' },
-      { label: 'Cistella setmanal', href: '#contacte' },
+      { label: 'Tots els productes', to: '/catalog' },
+      { label: 'Cistella setmanal', to: '/#contacte' },
     ],
   },
   {
     title: 'Cooperativa',
     links: [
-      { label: 'La nostra història', href: '#cooperativa' },
-      { label: 'Els productors', href: '#cooperativa' },
-      { label: 'Sostenibilitat', href: '#cooperativa' },
-      { label: 'Treballa amb nosaltres', href: '#contacte' },
+      { label: 'La nostra història', to: '/#cooperativa' },
+      { label: 'Els productors', to: '/#cooperativa' },
+      { label: 'Sostenibilitat', to: '/#cooperativa' },
+      { label: 'Treballa amb nosaltres', to: '/#contacte' },
     ],
   },
 ]
@@ -35,20 +33,20 @@ export default function Footer() {
               proximitat directament a la teva taula, amb un preu just per a qui el cultiva.
             </p>
             <div className="mt-6 flex items-center gap-2">
-              <a
-                href="#contacte"
+              <Link
+                to="/#contacte"
                 aria-label="Instagram d'AgroBotiga"
                 className="grid h-10 w-10 place-items-center rounded-full border border-cream/15 text-cream/70 transition hover:border-cream/35 hover:text-cream"
               >
                 <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href="#contacte"
+              </Link>
+              <Link
+                to="/#contacte"
                 aria-label="Facebook d'AgroBotiga"
                 className="grid h-10 w-10 place-items-center rounded-full border border-cream/15 text-cream/70 transition hover:border-cream/35 hover:text-cream"
               >
                 <Facebook className="h-4 w-4" />
-              </a>
+              </Link>
               <a
                 href="mailto:hola@agrobotiga.coop"
                 aria-label="Enviar un correu a AgroBotiga"
@@ -67,12 +65,12 @@ export default function Footer() {
               <ul className="mt-5 space-y-3 text-sm">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.to}
                       className="transition hover:text-cream"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -119,19 +117,15 @@ export default function Footer() {
         <div className="mt-14 flex flex-col gap-4 border-t border-cream/10 pt-7 text-xs text-cream/35 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 AgroBotiga Cooperativa V. · Tots els drets reservats.</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <a href="#contacte" className="transition hover:text-cream/70">
+            <Link to="/#contacte" className="transition hover:text-cream/70">
               Avís legal
-            </a>
-            <a href="#contacte" className="transition hover:text-cream/70">
+            </Link>
+            <Link to="/#contacte" className="transition hover:text-cream/70">
               Privacitat
-            </a>
-            <a href="#contacte" className="transition hover:text-cream/70">
+            </Link>
+            <Link to="/#contacte" className="transition hover:text-cream/70">
               Cookies
-            </a>
-            <span className="inline-flex items-center gap-2 rounded-full border border-cream/10 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-cream/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-leaf-400" />
-              Demo visual · Sense API
-            </span>
+            </Link>
           </div>
         </div>
       </div>
